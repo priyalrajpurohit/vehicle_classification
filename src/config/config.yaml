@@ -1,0 +1,83 @@
+# Project Configuration
+project:
+  name: "Vehicle Type Classification"
+  version: "1.0.0"
+  description: "CNN-based vehicle type classification using transfer learning"
+
+# Data Configuration
+data:
+  raw_data_path: "data/raw"
+  processed_data_path: "data/processed"
+  external_data_path: "data/external"
+  traffic_data_path: "traffic_data"
+  train_path: "traffic_data/train"
+  valid_path: "traffic_data/valid"
+  yaml_path: "traffic_data/data_1.yaml"
+
+# Image Configuration
+image:
+  width: 224
+  height: 224
+  channels: 3
+  mean: [0.485, 0.456, 0.406]
+  std: [0.229, 0.224, 0.225]
+
+# Model Configuration
+model:
+  name: "efficientnet_b0"
+  pretrained: true
+  num_classes: 4
+  dropout_rate: 0.3
+  save_path: "models/best_model.pth"
+  checkpoint_path: "models/checkpoints"
+
+# Training Configuration
+training:
+  batch_size: 32
+  epochs: 50
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  early_stopping_patience: 10
+  reduce_lr_patience: 5
+  reduce_lr_factor: 0.5
+  min_lr: 0.00001
+
+# Class Labels
+classes:
+  - "car"
+  - "bike"
+  - "truck"
+  - "bus"
+
+# Evaluation Metrics
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+
+# Augmentation Configuration
+augmentation:
+  train:
+    horizontal_flip: true
+    vertical_flip: false
+    rotation_limit: 15
+    brightness_limit: 0.2
+    contrast_limit: 0.2
+    blur_limit: 3
+  valid:
+    resize_only: true
+
+# Logging Configuration
+logging:
+  level: "INFO"
+  format: "{time:YYYY-MM-DD HH:mm:ss} | {level} | {message}"
+  log_file: "logs/training.log"
+
+# Streamlit Configuration
+streamlit:
+  title: "Vehicle Type Classification"
+  page_icon: "🚗"
+  layout: "wide"
+  max_upload_size: 10  # MB
